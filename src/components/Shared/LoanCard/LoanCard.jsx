@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const LoanCard = ({ loan }) => {
   return (
@@ -30,12 +31,12 @@ const LoanCard = ({ loan }) => {
           </p>
         </div>
 
-        <a
-          href={`/loan-details/${loan._id}`}
+        <Link
+          to={`/loan-details/${loan._id}`}
           className="mt-4 btn btn-gradient w-full bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 text-black font-bold hover:from-yellow-500 hover:to-orange-500 shadow-lg rounded-xl"
         >
           View Details
-        </a>
+        </Link>
       </div>
     </div>
   );

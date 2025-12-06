@@ -4,7 +4,7 @@ const ExtraSections = () => {
   return (
     <div className="space-y-24">
       {/* Section 1: Our Mission */}
-      <section className="py-15">
+      <section className="pt-10">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-12">Our Mission</h2>
 

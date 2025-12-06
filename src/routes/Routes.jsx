@@ -1,4 +1,5 @@
 import Home from "../pages/Home/Home";
+
 import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
@@ -14,6 +15,8 @@ import MyInventory from "../pages/Dashboard/Seller/MyInventory";
 import ManageOrders from "../pages/Dashboard/Seller/ManageOrders";
 import MyOrders from "../pages/Dashboard/Customer/MyOrders";
 import { createBrowserRouter } from "react-router";
+import LoanAll from "../pages/LoanAll/LoanAll";
+import LoanDetails from "../components/Shared/LoanCard/LoanDetails";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +34,18 @@ export const router = createBrowserRouter([
       },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUp /> },
+      {
+        path: "/all-loans",
+        element: <LoanAll></LoanAll>,
+      },
+      {
+        path: "/all-loans",
+        element: <LoanAll></LoanAll>,
+      },
+      {
+        path: "/loan-details/:id",
+        element: <PrivateRoute><LoanDetails></LoanDetails></PrivateRoute>,
+      },
     ],
   },
 

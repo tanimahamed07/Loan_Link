@@ -70,9 +70,7 @@ const Feedback = () => {
         <h2 className="text-3xl sm:text-4xl font-extrabold dark:text-gray-100">
           Customer Feedback
         </h2>
-        <p className="text-gray-base mt-2">
-          Hear from our satisfied borrowers
-        </p>
+        <p className="text-gray-base mt-2">Hear from our satisfied borrowers</p>
       </div>
 
       <div className="container mx-auto px-4">
@@ -80,7 +78,6 @@ const Feedback = () => {
           {feedbackData.map((feedback) => (
             <div key={feedback.id} className="px-4">
               <div className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 relative border border-gray-200 dark:border-gray-700">
-
                 {/* Header (Avatar + Name + Role) */}
                 <div className="flex gap-4 items-center">
                   <img
