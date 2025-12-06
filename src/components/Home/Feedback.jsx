@@ -47,7 +47,6 @@ const Feedback = () => {
     autoplay: true,
     autoplaySpeed: 4000,
     arrows: false,
-
     responsive: [
       {
         breakpoint: 1024, // tablet
@@ -65,28 +64,41 @@ const Feedback = () => {
   };
 
   return (
-    <section className="py-16 bg-base-100 text-base-content">
+    <section className="py-16  text-base-content transition-colors duration-300">
       <div className="text-center mb-12">
-        <h2 className="text-3xl sm:text-4xl font-extrabold dark:text-gray-100">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">
           Customer Feedback
         </h2>
-        <p className="text-gray-base mt-2">Hear from our satisfied borrowers</p>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">
+            What our clients say about us
+        </p>
       </div>
 
       <div className="container mx-auto px-4">
-        <Slider {...settings}>
+        <Slider {...settings} className="pb-10">
           {feedbackData.map((feedback) => (
-            <div key={feedback.id} className="px-4">
-              <div className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 relative border border-gray-200 dark:border-gray-700">
+            <div key={feedback.id} className="px-4 py-2">
+              <div 
+                className="
+                  relative 
+                  bg-white dark:bg-neutral-900/90 
+                  border border-gray-200 dark:border-amber-400/30 
+                  shadow-lg dark:shadow-[0_0_10px_rgba(251,191,36,0.15)] 
+                  backdrop-blur-xl
+                  rounded-2xl p-8 text-center 
+                  hover:scale-[1.03] transition-all duration-300
+                  hover:shadow-xl dark:hover:shadow-[0_0_15px_rgba(251,191,36,0.25)]
+                "
+              >
                 {/* Header (Avatar + Name + Role) */}
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-4 items-center text-left">
                   <img
                     src={feedback.avatar}
                     alt={feedback.name}
-                    className="w-14 h-14 rounded-full object-cover"
+                    className="w-14 h-14 rounded-full object-cover border-2 border-amber-400"
                   />
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-amber-300">
                       {feedback.name}
                     </h4>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -96,21 +108,26 @@ const Feedback = () => {
                 </div>
 
                 {/* Message */}
-                <p className="text-gray-600 dark:text-gray-300 italic mt-4">
+                <p className="italic mt-4 text-gray-600 dark:text-gray-200 leading-relaxed text-left">
                   "{feedback.message}"
                 </p>
 
-                {/* Rating */}
-                <div className="flex text-yellow-500 mt-4">
-                  {Array(5)
-                    .fill()
-                    .map((_, i) => (
-                      <FaStar key={i} className="mr-1" />
-                    ))}
-                </div>
+                {/* Rating & Share */}
+                <div className="flex justify-between items-center mt-6">
+                    {/* Stars */}
+                    <div className="flex text-amber-400 text-sm">
+                      {Array(5)
+                        .fill()
+                        .map((_, i) => (
+                          <FaStar key={i} className="mr-1" />
+                        ))}
+                    </div>
 
-                {/* Share Icon */}
-                <FaShareSquare className="absolute bottom-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer" />
+                    {/* Share Icon */}
+                    <FaShareSquare 
+                        className="text-gray-400 hover:text-amber-500 dark:text-gray-500 dark:hover:text-amber-400 cursor-pointer transition-colors text-lg" 
+                    />
+                </div>
               </div>
             </div>
           ))}

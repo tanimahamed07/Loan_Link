@@ -16,7 +16,7 @@ const Loan = () => {
   console.log(loans);
 
   return (
-    <section className="py-12 ">
+    <section className="py-12  ">
       <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center mb-8">

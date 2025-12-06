@@ -3,37 +3,56 @@ import { Link } from "react-router";
 
 const LoanCard = ({ loan }) => {
   return (
-    <div className="card bg-white shadow-2xl hover:scale-102 transition-transform duration-300 rounded-2xl overflow-hidden relative">
-      {/* Optional subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/40 to-white opacity-0 hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
-
-      <figure>
+    <div
+      className="
+        card 
+        relative 
+        bg-white dark:bg-neutral-900/90  /* Dark Mode BG */
+        border border-gray-200 dark:border-amber-400/30 /* Dark Mode Border */
+        shadow-xl dark:shadow-[0_0_15px_rgba(251,191,36,0.1)] /* Dark Mode Shadow Glow */
+        hover:scale-[1.02] hover:shadow-2xl dark:hover:shadow-[0_0_20px_rgba(251,191,36,0.25)] /* Hover Effect */
+        transition-all duration-300 rounded-2xl overflow-hidden
+      "
+    >
+      <figure className="h-52 overflow-hidden">
         <img
           src={loan.image}
           alt={loan.title}
-          className="w-full h-52 object-cover"
+          // Image styling adjusted for smooth hover zoom
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" 
         />
       </figure>
 
       <div className="card-body p-6 flex flex-col justify-between">
         <div>
-          <h2 className="card-title text-2xl font-extrabold text-gray-900 mb-2">
+          <h2 className="card-title text-2xl font-extrabold mb-2 text-gray-900 dark:text-amber-300">
             {loan.title}
           </h2>
-          <p className="text-gray-500 mb-1">Category: {loan.category}</p>
-          <p className="text-gray-700 mb-1">
-            Interest:{" "}
-            <span className="font-semibold">{loan.interestRate}%</span>
+          {/* Text colors adjusted for dark mode readability */}
+          <p className="mb-1 text-gray-600 dark:text-gray-400">
+            Category: <span className="font-medium dark:text-gray-300">{loan.category}</span>
           </p>
-          <p className="text-gray-700">
+          <p className="mb-1 text-gray-600 dark:text-gray-400">
+            Interest:{" "}
+            <span className="font-semibold text-red-600 dark:text-red-400">{loan.interestRate}%</span>
+          </p>
+          <p className="text-gray-600 dark:text-gray-400">
             Max Loan Limit:{" "}
-            <span className="font-semibold">${loan.maxLimit}</span>
+            <span className="font-semibold text-green-600 dark:text-green-400">${loan.maxLimit}</span>
           </p>
         </div>
 
+        {/* Button styling updated to match the amber/gradient theme, with better hover */}
         <Link
           to={`/loan-details/${loan._id}`}
-          className="mt-4 btn btn-gradient w-full bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-400 text-black font-bold hover:from-yellow-500 hover:to-orange-500 shadow-lg rounded-xl"
+          className="
+            mt-6 py-3 px-4 text-center 
+            bg-gradient-to-r from-amber-400 to-orange-500 
+            text-white dark:text-gray-900 font-bold 
+            rounded-xl shadow-md 
+            hover:shadow-lg hover:brightness-110 
+            transition-all duration-300 ease-in-out
+          "
         >
           View Details
         </Link>

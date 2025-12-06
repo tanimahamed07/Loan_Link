@@ -10,17 +10,22 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "light" ? "light" : "dark"
+  );
 
-  // Apply theme on change
+  // Load theme from localStorage on component mount
   useEffect(() => {
-    const html = document.querySelector("html");
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme);
+    document.querySelector("html").setAttribute("data-theme", savedTheme);
   }, [theme]);
 
-  const handleTheme = (checked) => {
-    setTheme(checked ? "dark" : "light");
+  // Toggle theme function
+  const handleThemeChange = (event) => {
+    const newTheme = event.target.checked ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   const handleLogout = async () => {
@@ -86,7 +91,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar container bg-base-100 mx-auto sticky top-0 z-50 backdrop-blur">
+    <div className="navbar container  mx-auto sticky top-0 z-50 backdrop-blur">
       {/* Left side: Logo */}
       <div className="navbar-start">
         <NavLink to="/" className="btn btn-ghost">
@@ -104,13 +109,13 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">
             {!user?.email ? guestLinks : userLinks}
           </ul>
-
           {/* Theme toggle */}
           <input
             type="checkbox"
+            value="dark"
+            className="toggle theme-controller mr-6"
             checked={theme === "dark"}
-            onChange={(e) => handleTheme(e.target.checked)}
-            className="toggle"
+            onChange={handleThemeChange}
           />
         </div>
 
