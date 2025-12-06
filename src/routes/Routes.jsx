@@ -12,12 +12,13 @@ import Statistics from "../pages/Dashboard/Common/Statistics";
 import MainLayout from "../layouts/MainLayout";
 import MyInventory from "../pages/Dashboard/Seller/MyInventory";
 import ManageOrders from "../pages/Dashboard/Seller/ManageOrders";
-import MyOrders from "../pages/Dashboard/Customer/MyOrders";
+import MyOrders from "../pages/Dashboard/Borrower/Myloan";
 import { createBrowserRouter } from "react-router";
 import LoanAll from "../pages/LoanAll/LoanAll";
 import LoanDetails from "../components/Shared/LoanCard/LoanDetails";
 import LoanForm from "../pages/LoanAll/LoanForm";
 import BorrowerRouts from "./BorrowerRouts";
+import MyLoan from "../pages/Dashboard/Borrower/Myloan";
 
 export const router = createBrowserRouter([
   {
@@ -103,13 +104,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-orders",
+        path: "my-loan",
         element: (
           <PrivateRoute>
-            <MyOrders />
+            <MyLoan />
           </PrivateRoute>
         ),
       },
+
       {
         path: "manage-orders",
         element: <ManageOrders />,
