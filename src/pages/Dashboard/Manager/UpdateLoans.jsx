@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../../utils";
+import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 
 const UpdateLoans = () => {
   const { id } = useParams();
@@ -70,7 +71,7 @@ const UpdateLoans = () => {
     }
   };
 
-  if (loading) return <p className="text-center mt-12">Loading...</p>;
+  if (loading) return <LoadingSpinner></LoadingSpinner>;
   if (!loan) return <p className="text-center mt-12">Loan not found.</p>;
 
   return (
