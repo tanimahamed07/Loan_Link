@@ -30,7 +30,7 @@ const UpdateLoans = () => {
     fetchLoan();
   }, [id]);
 
-  // 2️⃣ Handle form submit
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
