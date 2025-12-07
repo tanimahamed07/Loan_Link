@@ -6,7 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 const MyLoan = () => {
   const { user } = useAuth();
   console.log(user);
-  const { data: myLoans = [], isLoading } = useQuery({
+  const { data: myLoans = [], isLoading, refetch } = useQuery({
     queryKey: ["my-loans", user?.email],
     queryFn: async () => {
       const result = await axios(
@@ -15,6 +15,8 @@ const MyLoan = () => {
       return result.data;
     },
   });
+
+
   console.log(myLoans);
   return (
     <>
@@ -60,7 +62,7 @@ const MyLoan = () => {
 
                 <tbody>
                   {myLoans.map((myLoan) => (
-                    <CustomerOrderDataRow myLoan={myLoan} />
+                    <CustomerOrderDataRow myLoan={myLoan} refetch={refetch} />
                   ))}
                 </tbody>
               </table>
