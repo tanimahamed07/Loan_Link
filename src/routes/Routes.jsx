@@ -19,6 +19,7 @@ import AddLoan from "../pages/Dashboard/Manager/AddLoan";
 import ManageLoans from "../pages/Dashboard/Manager/ManageLoans";
 import PendingLoans from "../pages/Dashboard/Manager/PendingLoans";
 import ApprovedLoans from "../pages/Dashboard/Manager/ApprovedLoans";
+import UpdateLoans from "../pages/Dashboard/Manager/UpdateLoans";
 
 export const router = createBrowserRouter([
   {
@@ -127,6 +128,10 @@ export const router = createBrowserRouter([
       {
         path: "manage-orders",
         element: <ManageOrders />,
+      },
+      {
+        path: "manage-loans/update-loan/:id",
+        element: <UpdateLoans></UpdateLoans>,
       },
     ],
   },
