@@ -61,10 +61,7 @@ export const router = createBrowserRouter([
         path: "/payment-success",
         element: <PaymentSuccess />,
       },
-      {
-        path: "update-loan/:id",
-        element: <UpdateLoans></UpdateLoans>,
-      },
+     
       {
         path: '/about-us',
         element: <AboutUs></AboutUs>
@@ -91,6 +88,10 @@ export const router = createBrowserRouter([
             <Statistics />
           </PrivateRoute>
         ),
+      },
+       {
+        path: "manage-loans/update-loan/:id",
+        element: <UpdateLoans></UpdateLoans>,
       },
       {
         path: "add-loan",

@@ -38,7 +38,7 @@ const BorrowerStatistics = () => {
   ];
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
+    <div>
       <h1 className="text-2xl font-bold mb-6">My Loan Statistics</h1>
 
       {/* KPI Cards */}

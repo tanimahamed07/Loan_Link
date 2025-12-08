@@ -1,6 +1,23 @@
 import React from "react";
 
 const AboutUs = () => {
+  const teamCardInfo = [
+    {
+      name: "Alex Johnson",
+      role: "CEO & Founder",
+      img: "https://i.pravatar.cc/300?img=11",
+    },
+    {
+      name: "Sarah Williams",
+      role: "Head of Finance",
+      img: "https://i.pravatar.cc/300?img=5",
+    },
+    {
+      name: "Michael Chen",
+      role: "Lead Developer",
+      img: "https://i.pravatar.cc/300?img=3",
+    },
+  ];
   return (
     <div className="bg-base-100 text-base-content min-h-screen transition-colors duration-500">
       {/* --- Section 1: About Hero --- */}
@@ -74,27 +91,29 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-      <section className="py-20 bg-white dark:bg-neutral-900 transition-colors duration-500">
+      <section className="py-20 transition-colors duration-500">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900 dark:text-white">
                 Our{" "}
                 <span className="text-amber-500 dark:text-amber-400">
-                  Story
+                  Mission
                 </span>
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                Founded in 2024, LoanLink was born out of a simple observation:
-                millions of hardworking people and small entrepreneurs are
-                denied access to quick, fair credit because of outdated systems
-                and lengthy paperwork.
+                At LoanLink, our mission is simple yet powerful: to make
+                financial support fast, transparent, and accessible for
+                everyone—regardless of their background or income level. We
+                believe that dreams should never be delayed because of slow
+                systems, outdated processes, or complicated paperwork.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                We decided to change that. Using modern technology and a
-                human-centered approach, we built a platform that approves
-                microloans in minutes — not weeks — while maintaining
-                transparency, security, and trust.
+                We are committed to empowering individuals and small businesses
+                with quick, secure microloans powered by modern technology. By
+                reducing approval time from days to minutes, we ensure that
+                people get the financial support they need exactly when it
+                matters most.
               </p>
             </div>
             <div className="flex justify-center">
@@ -109,7 +128,7 @@ const AboutUs = () => {
         </div>
       </section>
       {/* --- Section 3: Meet The Team --- */}
-      <section className="py-20 bg-gray-50 dark:bg-[#0d0d0d] transition-colors duration-500">
+      <section className="py-20 transition-colors duration-500">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
@@ -122,23 +141,7 @@ const AboutUs = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Team Member Cards */}
-            {[
-              {
-                name: "Alex Johnson",
-                role: "CEO & Founder",
-                img: "https://i.pravatar.cc/300?img=11",
-              },
-              {
-                name: "Sarah Williams",
-                role: "Head of Finance",
-                img: "https://i.pravatar.cc/300?img=5",
-              },
-              {
-                name: "Michael Chen",
-                role: "Lead Developer",
-                img: "https://i.pravatar.cc/300?img=3",
-              },
-            ].map((member, idx) => (
+            {teamCardInfo.map((member, idx) => (
               <div
                 key={idx}
                 className="
