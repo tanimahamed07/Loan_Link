@@ -27,6 +27,8 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import ManagerRouts from "./ManagerRouts";
 import BorrowerRouts from "./BorrowerRouts";
 import AdminRouts from "./AdminRouts";
+import SuspendedPage from "../pages/SuspendedPage/SuspendedPage";
+import SuspendUserModal from "../components/Modal/UserSuspendModal";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +75,10 @@ export const router = createBrowserRouter([
         path: "/contact-us",
         element: <ContactUs></ContactUs>,
       },
+       {
+        path: 'suspended',
+        element: <SuspendedPage></SuspendedPage>
+      }
     ],
   },
 
@@ -191,6 +197,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+     
     ],
   },
 ]);

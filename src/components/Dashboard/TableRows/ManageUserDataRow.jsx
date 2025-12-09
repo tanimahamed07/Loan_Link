@@ -1,9 +1,12 @@
 import { useState } from "react";
 import UpdateUserRoleModal from "../../Modal/UpdateUserRoleModal";
+import UserSuspendModal from "../../Modal/UserSuspendModal";
 // import SuspendModal from "./SuspendModal";
 
 const ManageUsersRow = ({ user, refetch }) => {
   let [isOpen, setIsOpen] = useState(false);
+  const [isViewOpen, setIsViewOpen] = useState(false);
+
   const closeModal = () => setIsOpen(false);
 
   return (
@@ -26,7 +29,7 @@ const ManageUsersRow = ({ user, refetch }) => {
           </span>
         ) : (
           <span
-            onClick={() => setOpenSuspendModal(true)}
+            onClick={() => setIsViewOpen(true)}
             className="px-3  py-1 bg-red-600 text-white rounded hover:bg-red-700"
           >
             Suspend
@@ -42,13 +45,13 @@ const ManageUsersRow = ({ user, refetch }) => {
         />
 
         {/* Suspend Modal */}
-        {/* {openSuspendModal && (
-          <SuspendModal
+        {isViewOpen && (
+          <UserSuspendModal
             user={user}
-            closeModal={() => setOpenSuspendModal(false)}
-            refetch={refetch}
+            isOpen={isViewOpen} // correct prop
+            closeModal={() => setIsViewOpen(false)}
           />
-        )} */}
+        )}
       </td>
     </tr>
   );

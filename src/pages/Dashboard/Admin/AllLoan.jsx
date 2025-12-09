@@ -3,8 +3,10 @@ import axios from "axios";
 import React from "react";
 import ManageLoanDataRow from "../../../components/Dashboard/TableRows/ManageLoanDataRow";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AllLoan = () => {
+  const axiosSecure = useAxiosSecure()
   const {
     data: allLoans = [],
     isLoading,
@@ -12,7 +14,7 @@ const AllLoan = () => {
   } = useQuery({
     queryKey: ["all-loans"],
     queryFn: async () => {
-      const result = await axios(`${import.meta.env.VITE_API_URL}/all-loans`);
+      const result = await axiosSecure(`/all-loans`);
       return result.data;
     },
   });

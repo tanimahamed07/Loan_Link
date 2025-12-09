@@ -1,11 +1,13 @@
-import axios from "axios";
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { imageUpload } from "../../../utils";
 import { useNavigate } from "react-router";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddLoanForm = () => {
+  const axiosSecure = useAxiosSecure()
   const { register, handleSubmit, reset } = useForm();
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -44,8 +46,8 @@ const navigate = useNavigate()
       };
 
 
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/loans`,
+      const res = await axiosSecure.post(
+        `/loans`,
         loanData
       );
 

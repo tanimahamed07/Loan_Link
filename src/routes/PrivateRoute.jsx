@@ -1,14 +1,32 @@
-import useAuth from '../hooks/useAuth'
-import { Navigate, useLocation } from 'react-router'
-import LoadingSpinner from '../components/Shared/LoadingSpinner'
+import { Navigate, useLocation } from "react-router";
+import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../components/Shared/LoadingSpinner";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth()
-  const location = useLocation()
+  const { user, loading } = useAuth();
+  const location = useLocation();
+  const axiosSecure = useAxiosSecure();
 
-  if (loading) return <LoadingSpinner />
-  if (user) return children
-  return <Navigate to='/login' state={location.pathname} replace='true' />
-}
+  const { data: userInfo = {}, isLoading: isUserLoading } = useQuery({
+    queryKey: ["users", user?.email],
+    queryFn: async () => {
+      const result = await axiosSecure.get(`/user-profile/${user?.email}`);
+      return result.data;
+    },
+    enabled: !!user?.email,
+  });
 
-export default PrivateRoute
+  if (loading || isUserLoading) return <LoadingSpinner />;
+
+  if (userInfo?.status === "suspended") {
+    return <Navigate to="/suspended" replace />;
+  }
+
+  if (!user) return <Navigate to="/login" state={location.pathname} replace />;
+
+  return children;
+};
+
+export default PrivateRoute;

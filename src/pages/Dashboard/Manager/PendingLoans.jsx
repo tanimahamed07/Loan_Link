@@ -1,18 +1,20 @@
 // import PlantDataRow from "../../../components/Dashboard/TableRows/PlantDataRow";
 
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import PendingLoanDataRow from "../../../components/Dashboard/TableRows/PendingLoanDataRow";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 // import ManageLoanDataRow from "../../../components/Dashboard/TableRows/ManageLoanDataRow";
 
 const PendingLoans = () => {
+  const axiosSecure = useAxiosSecure()
    const {
     data: pendingLoans = [],
     refetch,
   } = useQuery({
     queryKey: ["all-loans"],
     queryFn: async () => {
-      const result = await axios(`${import.meta.env.VITE_API_URL}/pending-loans`);
+      const result = await axiosSecure(`/pending-loans`);
       return result.data;
     },
   });

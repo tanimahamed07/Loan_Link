@@ -1,12 +1,12 @@
-import { FaUserCog } from 'react-icons/fa'
+import { FaUsers, FaClipboardList, FaFileSignature } from 'react-icons/fa'
 import MenuItem from './MenuItem'
 
 const AdminMenu = () => {
   return (
     <>
-      <MenuItem icon={FaUserCog} label='Manage Users' address='manage-users' />
-      <MenuItem icon={FaUserCog} label='All Loan' address='all-loan' />
-      <MenuItem icon={FaUserCog} label='Loan Applications' address='loan-applications' />
+      <MenuItem icon={FaUsers} label='Manage Users' address='manage-users' />
+      <MenuItem icon={FaClipboardList} label='All Loans' address='all-loan' />
+      <MenuItem icon={FaFileSignature} label='Loan Applications' address='loan-applications' />
     </>
   )
 }

@@ -9,10 +9,11 @@ const AdminStatistics = () => {
   const { data: allLoans = [], isLoading } = useQuery({
     queryKey: ["all-loans"],
     queryFn: async () => {
-      const result = await axios(`${import.meta.env.VITE_API_URL}/all-loans-application`);
+      const result = await axios(`${import.meta.env.VITE_API_URL}/all-loans-application/statistic`);
       return result.data;
     },
   });
+  console.log(allLoans)
 
   if (isLoading) return <div className="text-center mt-10"><LoadingSpinner></LoadingSpinner></div>;
 

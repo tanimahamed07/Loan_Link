@@ -1,11 +1,12 @@
 import React from "react";
 import ApprovedLoans from "../Manager/ApprovedLoans";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import AllApplicationDataRow from "../../../components/Dashboard/TableRows/AllApplicationDataRow";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const LoanApplication = () => {
+  const axiosSecure = useAxiosSecure()
       const {
     data: allLoans = [],
     isLoading,
@@ -13,8 +14,8 @@ const LoanApplication = () => {
   } = useQuery({
     queryKey: ["all-loans"],
     queryFn: async () => {
-      const result = await axios(
-        `${import.meta.env.VITE_API_URL}/all-loans-application`
+      const result = await axiosSecure(
+        `/all-loans-application`
       );
       return result.data;
     },
