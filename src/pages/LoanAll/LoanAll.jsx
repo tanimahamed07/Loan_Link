@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import { motion } from "framer-motion";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import LoanCard from "../../components/Shared/LoanCard/LoanCard";
 
@@ -14,10 +15,24 @@ const LoanAll = () => {
   });
 
   if (isLoading) return <LoadingSpinner />;
-  console.log(allLoans);
+
+  // Variants for container (stagger) and individual cards
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1 } }, // stagger each child by 0.1s
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.5, ease: "easeOut" } 
+    },
+  };
 
   return (
-    <section className="py-12 ">
+    <section className="py-12">
       <div className="container mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -30,12 +45,19 @@ const LoanAll = () => {
         </div>
 
         {/* Loans Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {/* LoanCard Components */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }} // animate when scrolled into view
+        >
           {allLoans.map((loan) => (
-            <LoanCard key={loan._id} loan={loan} />
+            <motion.div key={loan._id} variants={cardVariants}>
+              <LoanCard loan={loan} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

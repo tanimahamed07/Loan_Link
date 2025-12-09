@@ -114,7 +114,6 @@ const Navbar = () => {
   );
 
   return (
-    // Fixed Navbar with specific background color matching dark/light mode base
     <div className="bg-base-200 dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 sticky top-0 z-50 transition-colors duration-300 shadow-md">
       <Container>
         <div className="navbar container mx-auto p-0 h-16">

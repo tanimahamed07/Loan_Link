@@ -1,85 +1,94 @@
 import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
 
 const HeroBanner = () => {
   const navigate = useNavigate();
 
+  // Variants
+  const textVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
+  };
+
+  const badgeVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: (i) => ({ opacity: 1, y: 0, transition: { delay: i * 0.2 } }),
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    hover: { scale: 1.02 },
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    hover: { scale: 1.05 },
+  };
+
+  const badges = ["100% Secure", "No Hidden Fees", "24/7 Support"];
+
   return (
-    // Main Section container with background control
     <section className="py-16 md:py-24 overflow-hidden relative text-base-content transition-colors duration-500">
-      
-      {/* Background Amber/Gold Glow Effect */}
       <div className="absolute inset-0 opacity-50 dark:opacity-40 pointer-events-none">
-        <div
-          className="
-            absolute inset-0 
-            transition-colors duration-500
-          "
-        />
+        <div className="absolute inset-0 transition-colors duration-500" />
       </div>
 
       <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between relative z-10">
-        
-        {/* Left Content (Text & CTAs) */}
+        {/* Left Content */}
         <div className="lg:w-6/12 text-center lg:text-left">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 md:mb-8 leading-tight text-gray-900 dark:text-white">
+          <motion.h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 md:mb-8 leading-tight text-gray-900 dark:text-white"
+            variants={textVariants}
+            initial="hidden"
+            animate="visible"
+          >
             Get Microloans <br />
-            <span
-              className="
-                bg-gradient-to-r from-amber-500 to-orange-500 
-                dark:from-amber-300 dark:to-orange-400 
-                bg-clip-text text-transparent
-                inline-block
-              "
-            >
+            <span className="bg-gradient-to-r from-amber-500 to-orange-500 dark:from-amber-300 dark:to-orange-400 bg-clip-text text-transparent inline-block">
               Instantly
             </span>{" "}
             with LoanLink
-          </h1>
+          </motion.h1>
 
-          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-2xl mx-auto lg:mx-0">
+          <motion.p
+            className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-10 max-w-2xl mx-auto lg:mx-0"
+            variants={textVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.2 }}
+          >
             No paperwork. No waiting. Apply in 2 minutes, get approved in
             seconds. Focus on what matters, we handle the rest.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
-            
-            {/* Primary CTA: Apply Now */}
-            <button
-              onClick={() => navigate("/apply-loan")}
-              className="
-                group relative overflow-hidden 
-                bg-gradient-to-r from-amber-500 to-orange-600
-                hover:from-amber-600 hover:to-orange-700
-                text-white dark:text-gray-900 font-bold text-lg px-8 py-3.5 
-                rounded-xl shadow-xl shadow-amber-500/40 
-                hover:scale-[1.03] 
-                transition-all duration-300
-              "
-            >
-              <span className="relative z-10">Apply for Loan Now</span>
-              <div className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
-
-            {/* Secondary CTA: Explore All Loans */}
-            <button
+          <motion.div
+            className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start"
+            variants={buttonVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.button
               onClick={() => navigate("/all-loans")}
-              className="
-                border-2 border-amber-400/60 dark:border-amber-400/40 
-                text-gray-800 dark:text-amber-300
-                hover:bg-amber-100/70 dark:hover:bg-neutral-800/80
-                font-semibold text-lg px-8 py-3.5 
-                rounded-xl transition-all duration-300
-                shadow-md hover:shadow-lg
-              "
+              className="group relative overflow-hidden bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white dark:text-gray-900 font-bold text-lg px-8 py-3.5 rounded-xl shadow-xl shadow-amber-500/40 transition-all duration-300"
+              whileHover="hover"
+              variants={buttonVariants}
             >
-              Explore All Loans →
-            </button>
-          </div>
+              <span className="relative z-10"> Explore All Loans →</span>
+              <div className="absolute inset-0 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.button>
+          </motion.div>
 
-          {/* Trust Badges */}
           <div className="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start text-base text-gray-600 dark:text-gray-400">
-            {["100% Secure", "No Hidden Fees", "24/7 Support"].map((text) => (
-              <div key={text} className="flex items-center gap-2">
+            {badges.map((text, index) => (
+              <motion.div
+                key={text}
+                className="flex items-center gap-2"
+                custom={index}
+                variants={badgeVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 <svg
                   className="w-5 h-5 text-green-500 dark:text-green-400"
                   viewBox="0 0 20 20"
@@ -92,24 +101,25 @@ const HeroBanner = () => {
                   />
                 </svg>
                 <span>{text}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* Right Image */}
-        <div className="lg:w-6/12 mt-12 lg:mt-0 flex justify-center">
+        <motion.div
+          className="lg:w-6/12 mt-12 lg:mt-0 flex justify-center"
+          variants={imageVariants}
+          initial="hidden"
+          animate="visible"
+          whileHover="hover"
+        >
           <img
             src="https://wemabank.com/assets/Wema%20Bank%20Salary%20Based%20Loan-WuTcJiQp.jpg"
             alt="Instant Loan Approval"
-            className="
-              w-full max-w-lg mx-auto rounded-3xl 
-              shadow-2xl shadow-gray-400/50 dark:shadow-neutral-950/70
-              transition-transform duration-500 hover:scale-[1.01] 
-              border-4 border-white/50 dark:border-neutral-800/50
-            "
+            className="w-full max-w-lg mx-auto rounded-3xl shadow-2xl shadow-gray-400/50 dark:shadow-neutral-950/70 transition-transform duration-500 border-4 border-white/50 dark:border-neutral-800/50"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

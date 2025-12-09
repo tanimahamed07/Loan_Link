@@ -11,10 +11,10 @@ const ManageUsersRow = ({ user, refetch }) => {
 
   return (
     <tr className="border-b ">
-      <td className="px-5 py-4">{user.name}</td>
-      <td className="px-5 py-4">{user.email}</td>
-      <td className="px-5 py-4 capitalize">{user.role}</td>
-      <td className="px-5 py-4 space-x-2">
+      <td className="px-5 text-center py-4">{user.name}</td>
+      <td className="px-5 text-center py-4">{user.email}</td>
+      <td className="px-5 text-center py-4 capitalize">{user.role}</td>
+      <td className="px-5 py-4 text-center space-x-2">
         {/* Update Role */}
         <span onClick={() => setIsOpen(true)} className="">
           <span className="px-3  py-1 bg-blue-600 text-white rounded hover:bg-blue-700">

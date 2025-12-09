@@ -21,7 +21,22 @@ const AllLoan = () => {
   if (isLoading) {
     <LoadingSpinner></LoadingSpinner>;
   }
-  console.log(allLoans);
+    const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
