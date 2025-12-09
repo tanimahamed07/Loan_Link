@@ -1,22 +1,20 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import ManageUserDataRow from "../../../components/Dashboard/TableRows/ManageUserDataRow";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 
-const USERS_PER_PAGE = 1;
-
 const ManageUsers = () => {
+  const USERS_PER_PAGE = 5;
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const searchRef = useRef("");
 
-  // Search, filter, pagination state
   const [searchTerm, setSearchTerm] = useState("");
   const [filterRole, setFilterRole] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // React Query v5 useQuery
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["users", user?.email, currentPage, searchTerm, filterRole],
     queryFn: async () => {
@@ -28,9 +26,8 @@ const ManageUsers = () => {
           role: filterRole,
         },
       });
-      return res.data; // { users: [...], totalPages: number, currentPage: number }
+      return res.data;
     },
-    keepPreviousData: true, // keeps old data while loading next page
   });
 
   if (isLoading) return <LoadingSpinner />;
@@ -46,19 +43,25 @@ const ManageUsers = () => {
         <input
           type="text"
           placeholder="Search by name or email"
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1); // reset page
-          }}
+          ref={searchRef}
           className="border p-2 rounded w-64"
         />
+
+        <button
+          onClick={() => {
+            setSearchTerm(searchRef.current.value);
+            setCurrentPage(1);
+          }}
+          className="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Search
+        </button>
 
         <select
           value={filterRole}
           onChange={(e) => {
             setFilterRole(e.target.value);
-            setCurrentPage(1); // reset page
+            setCurrentPage(1);
           }}
           className="border p-2 rounded"
         >

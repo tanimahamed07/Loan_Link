@@ -79,7 +79,7 @@ const CustomerOrderDataRow = ({ myLoan, refetch }) => {
       </td>
 
       {/* Loan Info */}
-      <td className="px-5 py-5 border-b bg-white text-sm">
+      <td className="px-5 text-center py-5 border-b bg-white text-sm">
         <p className="font-semibold">{myLoan.loanTitle}</p>
         <p className="text-gray-600 text-sm">
           {myLoan.firstName} {myLoan.lastName}
@@ -87,12 +87,12 @@ const CustomerOrderDataRow = ({ myLoan, refetch }) => {
       </td>
 
       {/* Amount */}
-      <td className="px-5 py-5 border-b bg-white text-sm">
+      <td className="px-5 text-center py-5 border-b bg-white text-sm">
         <p>${myLoan.loanAmount}</p>
       </td>
 
       {/* Status */}
-      <td className="px-5 py-5 border-b bg-white text-sm">
+      <td className="px-5 py-5 text-center border-b bg-white text-sm">
         <p
           className={`font-bold ${
             myLoan.status === "Pending"
@@ -107,7 +107,7 @@ const CustomerOrderDataRow = ({ myLoan, refetch }) => {
       </td>
 
       {/* Actions */}
-      <td className="px-5 py-5 border-b bg-white text-sm space-x-2">
+      <td className="px-5 py-5 text-center border-b bg-white text-sm space-x-2">
         {/* View Details */}
         <button
           onClick={() => setIsViewOpen(true)}

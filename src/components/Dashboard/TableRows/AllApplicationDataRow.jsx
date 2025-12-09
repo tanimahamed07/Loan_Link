@@ -16,7 +16,7 @@ const AllApplicationDataRow = ({ loan }) => {
       </td>
 
       {/* Loan Info (User Email & Name) */}
-      <td className="px-5 py-5 border-b bg-white text-sm">
+      <td className="px-5 py-5 text-center border-b bg-white text-sm">
         <p className="font-semibold">{loan.userEmail}</p>
         <p className="text-gray-600 text-sm">
           {loan.firstName} {loan.lastName}
@@ -24,12 +24,12 @@ const AllApplicationDataRow = ({ loan }) => {
       </td>
 
       {/* Amount */}
-      <td className="px-5 py-5 border-b bg-white text-sm">
+      <td className="px-5 py-5 border-b text-center bg-white text-sm">
         <p>${loan.loanAmount}</p>
       </td>
 
       {/* Date */}
-      <td className="px-5 py-5 border-b bg-white text-sm">
+      <td className="px-5 text-center py-5 border-b bg-white text-sm">
         <span
           className={`px-3 py-1 rounded-full text-white font-medium
       ${
@@ -48,7 +48,7 @@ const AllApplicationDataRow = ({ loan }) => {
       </td>
 
       {/* Actions (Manager Requirements) */}
-      <td className="px-5 py-5 border-b bg-white text-sm space-x-2">
+      <td className="px-5 text-center py-5 border-b bg-white text-sm space-x-2">
         {/* 3. View Button */}
         <button
           onClick={handleView}

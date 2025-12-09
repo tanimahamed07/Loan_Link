@@ -8,7 +8,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AddLoanForm = () => {
   const axiosSecure = useAxiosSecure()
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploading, setUploading] = useState(false);
 const navigate = useNavigate()
@@ -16,13 +16,12 @@ const navigate = useNavigate()
     try {
       setUploading(true);
 
-      // 1️⃣ Upload image if selected
-      let imageURL = data.image; // default, in case URL field is used
+      let imageURL = data.image; 
       if (selectedImage) {
         imageURL = await imageUpload(selectedImage);
       }
 
-      // 2️⃣ Convert comma-separated strings to arrays
+
       const documentsArray = data.requiredDocuments
         ? data.requiredDocuments.split(",").map((doc) => doc.trim())
         : [];
@@ -31,7 +30,7 @@ const navigate = useNavigate()
         ? data.emiPlans.split(",").map((plan) => plan.trim())
         : [];
 
-      // 3️⃣ Prepare loan object
+
       const loanData = {
         title: data.title,
         description: data.description,

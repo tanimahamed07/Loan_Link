@@ -29,7 +29,7 @@ const LoanDetails = () => {
   if (isLoading || isRoleLoading) return <LoadingSpinner />;
 
   return (
-    <section className="min-h-screen bg-base-100 dark:bg-base-300 py-12 transition-colors">
+    <section className="py-12 transition-colors">
       <div className="container mx-auto px-6 max-w-7xl">
         {/* Main Hero Card */}
         <div className="bg-white dark:bg-neutral-900 rounded-3xl shadow-xl overflow-hidden border border-gray-200 dark:border-neutral-800">

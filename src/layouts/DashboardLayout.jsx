@@ -1,7 +1,11 @@
 import { Outlet } from 'react-router'; 
 import Sidebar from '../components/Dashboard/Sidebar/Sidebar';
+import { useEffect } from 'react';
 
 const DashboardLayout = () => {
+    useEffect(() => {
+      document.querySelector("html").setAttribute("data-theme", "light");
+    }, []);
   return (
     <div className="relative min-h-screen bg-gray-50 transition-colors duration-300">
       

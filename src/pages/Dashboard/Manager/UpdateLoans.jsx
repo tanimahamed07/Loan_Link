@@ -64,6 +64,7 @@ const UpdateLoans = () => {
         updatedData
       );
       toast.success("Loan updated successfully!");
+
       navigate(-1);
     } catch (err) {
       console.error(err);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ApplicationViewDetails from "../../Modal/ApplicationViewDetailsModal";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const PendingLoanDataRow = ({ loan, refetch }) => {
   const [isViewOpen, setIsViewOpen] = useState(false);
@@ -13,13 +14,54 @@ const PendingLoanDataRow = ({ loan, refetch }) => {
   };
 
   const handleApprove = () => {
-    updateStatus("Approved");
-    refetch();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to approve this loan!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#28a745",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, approve it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        updateStatus("Approved");
+        refetch();
+        Swal.fire({
+          icon: "success",
+          title: "Approved!",
+          text: "Loan has been approved successfully.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    });
   };
   const handleReject = () => {
-    updateStatus("Rejected");
-    refetch();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to reject this loan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, reject it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        updateStatus("Rejected");
+        refetch();
+        Swal.fire({
+          icon: "success",
+          title: "Rejected!",
+          text: "Loan has been rejected.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    });
   };
+
   const handleView = () => {
     console.log("click");
     setIsViewOpen(true);
@@ -49,7 +91,6 @@ const PendingLoanDataRow = ({ loan, refetch }) => {
         <p>{new Date(loan.createdAt).toLocaleDateString()}</p>
       </td>
 
-
       <td className="px-5 py-5 border-b bg-white text-sm space-x-2">
         {/* 1. Approve Button */}
         <button
@@ -77,8 +118,8 @@ const PendingLoanDataRow = ({ loan, refetch }) => {
         {isViewOpen && (
           <ApplicationViewDetails
             myLoan={loan}
-            isOpen={isViewOpen} 
-            closeModal={() => setIsViewOpen(false)} 
+            isOpen={isViewOpen}
+            closeModal={() => setIsViewOpen(false)}
           />
         )}
       </td>

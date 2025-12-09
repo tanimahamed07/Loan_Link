@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import React from "react";
 import ManageLoanDataRow from "../../../components/Dashboard/TableRows/ManageLoanDataRow";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
