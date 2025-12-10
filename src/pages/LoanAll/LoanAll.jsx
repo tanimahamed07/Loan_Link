@@ -21,17 +21,20 @@ const LoanAll = () => {
     hidden: { opacity: 1 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+      transition: { 
+        staggerChildren: 0.1,  // Faster stagger
+        delayChildren: 0.05,   // Reduced delay
+      },
     },
   };
 
-  // Cards Animation
+  // Cards Animation: Optimized fade-up
   const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 }, // Reduced lift (y)
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.5, ease: "easeInOut" }, // Faster, smoother duration and ease
     },
   };
 
@@ -48,12 +51,16 @@ const LoanAll = () => {
           </p>
         </div>
 
-
+        {/* Loans Grid - Optimized for ONE-TIME Scroll Animation */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}   
+          // *** THE KEY FIX IS HERE ***
+          viewport={{ 
+            once: true, // This ensures the animation plays only ONE time
+            amount: 0.2 // Animation starts when 20% of the element is visible
+          }}   
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 px-5 sm:px-0"
         >
           {allLoans.map((loan) => (
@@ -61,7 +68,7 @@ const LoanAll = () => {
               key={loan._id}
               variants={cardVariants}
               className="w-full"
-              viewport={{ once: false }}  
+              // *** Removed viewport prop from here as it's redundant and conflicting ***
             >
               <LoanCard loan={loan} />
             </motion.div>

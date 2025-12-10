@@ -18,20 +18,23 @@ const Loan = () => {
 
   // Container handles stagger
   const containerVariants = {
-    hidden: { opacity: 1 },
-    visible: { 
+    hidden: { opacity: 1 }, // Note: You can keep opacity 1 here or change to 0 if the whole grid needs to fade in. For staggered children, opacity 1 is fine.
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+      transition: { 
+        staggerChildren: 0.1, // Adjusted stagger for a snappier look
+        delayChildren: 0.05,  // Reduced initial delay
+      },
     },
   };
 
-  // Each card animation
+  // Each card animation: Fade up and a bit faster
   const cardVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
+    hidden: { opacity: 0, y: 30 }, // Reduced y for less jump
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeInOut" }, // Faster, smoother ease
     },
   };
 
@@ -48,20 +51,25 @@ const Loan = () => {
           </p>
         </div>
 
-        {/* Loans Grid */}
+        {/* Loans Grid - Optimized for ONE-TIME Scroll Animation */}
+        
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 mx-5 sm:px-0"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }} 
+          // *** THE KEY FIX IS HERE ***
+          viewport={{ 
+            once: true, // Animation runs only ONE time when it enters the viewport
+            amount: 0.2 // Animation starts when 20% of the element is visible
+          }}   
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 px-5 sm:px-0"
         >
           {loans.map((loan) => (
             <motion.div
               key={loan._id}
               variants={cardVariants}
               className="w-full"
-              viewport={{ once: false }} 
+              // *** Removed viewport prop from here to prevent re-renders/conflicts ***
             >
               <LoanCard loan={loan} />
             </motion.div>

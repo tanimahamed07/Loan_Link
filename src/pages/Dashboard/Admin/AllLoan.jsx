@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { motion } from "framer-motion"; 
 import ManageLoanDataRow from "../../../components/Dashboard/TableRows/ManageLoanDataRow";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -17,13 +18,19 @@ const AllLoan = () => {
       return result.data;
     },
   });
+
+
   if (isLoading) {
-    <LoadingSpinner></LoadingSpinner>;
+    return <LoadingSpinner />;
   }
-    const containerVariants = {
+  
+
+  const containerVariants = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: 0.1 },
+      transition: { 
+        staggerChildren: 0.05,
+      },
     },
   };
 
@@ -32,7 +39,10 @@ const AllLoan = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
+      transition: { 
+        duration: 0.3,
+        ease: "easeOut" 
+      },
     },
   };
 
@@ -52,15 +62,20 @@ const AllLoan = () => {
                 </tr>
               </thead>
 
-              <tbody>
+              <motion.tbody
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 {allLoans.map((loan) => (
                   <ManageLoanDataRow
                     key={loan._id}
                     loan={loan}
                     refetch={refetch}
+                    variants={cardVariants} 
                   />
                 ))}
-              </tbody>
+              </motion.tbody>
             </table>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import ApplicationViewDetails from "../../Modal/ApplicationViewDetailsModal";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { FaCheck, FaEye, FaTimes } from "react-icons/fa";
 
 const PendingLoanDataRow = ({ loan, refetch }) => {
   const [isViewOpen, setIsViewOpen] = useState(false);
@@ -91,38 +92,55 @@ const PendingLoanDataRow = ({ loan, refetch }) => {
         <p>{new Date(loan.createdAt).toLocaleDateString()}</p>
       </td>
 
-      <td className="px-5 py-5 border-b bg-white text-sm space-x-2">
-        {/* 1. Approve Button */}
-        <button
-          onClick={handleApprove}
-          className="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded text-sm transition duration-150"
-        >
-          Approve
-        </button>
+      <td className="px-5 py-5 border-b bg-white text-sm">
+  <div className="flex flex-wrap justify-center gap-2">
 
-        {/* 2. Reject Button */}
-        <button
-          onClick={handleReject}
-          className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-sm transition duration-150"
-        >
-          Reject
-        </button>
+    {/* Approve */}
+    <button
+      onClick={handleApprove}
+      className="flex items-center gap-1 px-2 py-1
+                 bg-green-500 hover:bg-green-600
+                 text-white rounded text-xs md:text-sm"
+    >
+      {/* Mobile Icon */}
+      <span className="md:hidden text-sm"><FaCheck /></span>
+      {/* Desktop Text */}
+      <span className="hidden md:inline">Approve</span>
+    </button>
 
-        {/* 3. View Button */}
-        <button
-          onClick={handleView}
-          className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm transition duration-150"
-        >
-          View Details
-        </button>
-        {isViewOpen && (
-          <ApplicationViewDetails
-            myLoan={loan}
-            isOpen={isViewOpen}
-            closeModal={() => setIsViewOpen(false)}
-          />
-        )}
-      </td>
+    {/* Reject */}
+    <button
+      onClick={handleReject}
+      className="flex items-center gap-1 px-2 py-1
+                 bg-red-500 hover:bg-red-600
+                 text-white rounded text-xs md:text-sm"
+    >
+      <span className="md:hidden text-sm"><FaTimes /></span>
+      <span className="hidden md:inline">Reject</span>
+    </button>
+
+    {/* View */}
+    <button
+      onClick={handleView}
+      className="flex items-center gap-1 px-2 py-1
+                 bg-blue-500 hover:bg-blue-600
+                 text-white rounded text-xs md:text-sm"
+    >
+      <span className="md:hidden text-sm"><FaEye /></span>
+      <span className="hidden md:inline">View Details</span>
+    </button>
+
+    {/* Modal */}
+    {isViewOpen && (
+      <ApplicationViewDetails
+        myLoan={loan}
+        isOpen={isViewOpen}
+        closeModal={() => setIsViewOpen(false)}
+      />
+    )}
+  </div>
+</td>
+
     </tr>
   );
 };

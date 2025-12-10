@@ -1,8 +1,12 @@
 import React from "react";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules"; // ✅ Correct import for Swiper v10+
+
 import { FaStar, FaShareSquare } from "react-icons/fa";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 
 const feedbackData = [
   {
@@ -38,36 +42,6 @@ const feedbackData = [
 ];
 
 const Feedback = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 600,
-    slidesToShow: 3, // Desktop
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    arrows: false,
-
-    responsive: [
-      {
-        breakpoint: 1024, // Tablet
-        settings: {
-          slidesToShow: 2,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 640, // Mobile
-        settings: {
-          slidesToShow: 1,
-          arrows: false,
-          centerMode: true,
-          centerPadding: "20px", // prettier mobile look
-        },
-      },
-    ],
-  };
-
   return (
     <section className="py-12 text-base-content transition-colors duration-300">
       {/* Title */}
@@ -80,11 +54,22 @@ const Feedback = () => {
         </p>
       </div>
 
-      {/* Carousel */}
       <div className="container mx-auto px-2 sm:px-4">
-        <Slider {...settings} className="pb-8">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          spaceBetween={20}
+          slidesPerView={3}
+          loop={true}
+          autoplay={{ delay: 4000 }}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: { slidesPerView: 1, centeredSlides: true },
+            1024: { slidesPerView: 2 },
+            1200: { slidesPerView: 3 },
+          }}
+        >
           {feedbackData.map((feedback) => (
-            <div key={feedback.id} className="px-2 sm:px-4 py-2">
+            <SwiperSlide key={feedback.id}>
               <div
                 className="
                   relative 
@@ -134,9 +119,9 @@ const Feedback = () => {
                   />
                 </div>
               </div>
-            </div>
+            </SwiperSlide>
           ))}
-        </Slider>
+        </Swiper>
       </div>
     </section>
   );

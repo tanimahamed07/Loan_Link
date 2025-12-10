@@ -4,12 +4,13 @@ import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import PaymentDetailsModal from "../../Modal/PaymentDetailsModal";
 import ApplicationViewDetails from "../../Modal/ApplicationViewDetailsModal";
+import { FaCheck, FaEye, FaMoneyBillWave, FaTimes } from "react-icons/fa";
 
 const CustomerOrderDataRow = ({ myLoan, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isViewOpen, setIsViewOpen] = useState(false);
-//   const closePaymentModal = () => setIsOpen(false);
-// const closeViewModal = () => setIsViewOpen(false);
+  //   const closePaymentModal = () => setIsOpen(false);
+  // const closeViewModal = () => setIsViewOpen(false);
 
   const { user } = useAuth();
 
@@ -107,59 +108,74 @@ const CustomerOrderDataRow = ({ myLoan, refetch }) => {
       </td>
 
       {/* Actions */}
-      <td className="px-5 py-5 text-center border-b bg-white text-sm space-x-2">
-        {/* View Details */}
-        <button
-          onClick={() => setIsViewOpen(true)}
-          className="px-3 py-1 bg-blue-500 text-white rounded text-sm"
-        >
-          View Details
-        </button>
-
-        {/* Cancel Button (Only Pending) */}
-        {myLoan.status === "Pending" && (
+      <td className="px-5 py-5 text-center border-b bg-white text-sm">
+        <div className="flex items-center justify-center gap-3 whitespace-nowrap">
+          {/* View Details */}
           <button
-            onClick={handleCancelLoan}
-            className="px-3 py-1 bg-red-500 text-white rounded text-sm"
+            onClick={() => setIsViewOpen(true)}
+            className="flex items-center gap-1 px-2 py-1 bg-blue-500 text-white rounded text-xs md:text-sm"
           >
-            Cancel
+            {/* Mobile Icon */}
+            <span className="md:hidden text-sm">
+              <FaEye />
+            </span>
+            {/* Desktop Text */}
+            <span className="hidden md:inline">View Details</span>
           </button>
-        )}
 
-        {/* Pay Fee */}
-        {myLoan.applicationFeeStatus === "Unpaid" ? (
-          <button
-            onClick={handlePayment}
-            className="px-3 py-1 bg-lime-600 text-white rounded text-sm"
-          >
-            Pay $10 Fee
-          </button>
-        ) : (
-          <button
-            onClick={() => setIsOpen(true)}
-            className="px-3 py-1 bg-green-600 text-white rounded text-sm"
-          >
-            Paid
-          </button>
-        )}
+          {/* Cancel Button */}
+          {myLoan.status === "Pending" && (
+            <button
+              onClick={handleCancelLoan}
+              className="flex items-center gap-1 px-2 py-1 bg-red-500 text-white rounded text-xs md:text-sm"
+            >
+              <span className="md:hidden text-sm">
+                <FaTimes />
+              </span>
+              <span className="hidden md:inline">Cancel</span>
+            </button>
+          )}
 
-        {/* Application Details Modal */}
-        {isViewOpen && (
-          <ApplicationViewDetails
-            myLoan={myLoan}
-            isOpen={isViewOpen} // correct prop
-            closeModal={() => setIsViewOpen(false)} // separate close
-          />
-        )}
+          {/* Pay Fee */}
+          {myLoan.applicationFeeStatus === "Unpaid" ? (
+            <button
+              onClick={handlePayment}
+              className="flex items-center gap-1 px-2 py-1 bg-lime-600 text-white rounded text-xs md:text-sm"
+            >
+              <span className="md:hidden text-sm">
+                <FaMoneyBillWave />
+              </span>
+              <span className="hidden md:inline">Pay $10 Fee</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsOpen(true)}
+              className="flex items-center gap-1 px-2 py-1 bg-green-600 text-white rounded text-xs md:text-sm"
+            >
+              <span className="md:hidden text-sm">
+                <FaCheck/>
+              </span>
+              <span className="hidden md:inline">Paid</span>
+            </button>
+          )}
 
-        {/* Payment Details Modal */}
-        {isOpen && (
-          <PaymentDetailsModal
-            myLoan={myLoan}
-            isOpen={isOpen} // correct prop
-            closeModal={() => setIsOpen(false)} // separate close
-          />
-        )}
+          {/* Modals */}
+          {isViewOpen && (
+            <ApplicationViewDetails
+              myLoan={myLoan}
+              isOpen={isViewOpen}
+              closeModal={() => setIsViewOpen(false)}
+            />
+          )}
+
+          {isOpen && (
+            <PaymentDetailsModal
+              myLoan={myLoan}
+              isOpen={isOpen}
+              closeModal={() => setIsOpen(false)}
+            />
+          )}
+        </div>
       </td>
     </tr>
   );
