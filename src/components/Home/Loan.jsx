@@ -16,7 +16,6 @@ const Loan = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
-
   const containerVariants = {
     hidden: {},
     visible: {
@@ -48,14 +47,25 @@ const Loan = () => {
 
         {/* Loans Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="
+    grid 
+    grid-cols-1      
+    sm:grid-cols-2     
+    lg:grid-cols-3     
+    gap-6 sm:gap-8 lg:gap-10 
+    mx-5 sm:px-0
+  "
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }} 
+          viewport={{ once: true, amount: 0.3 }}
         >
           {loans.map((loan) => (
-            <motion.div key={loan._id} variants={cardVariants}>
+            <motion.div
+              key={loan._id}
+              variants={cardVariants}
+              className="w-full"
+            >
               <LoanCard loan={loan} />
             </motion.div>
           ))}

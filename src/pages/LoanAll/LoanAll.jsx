@@ -24,10 +24,10 @@ const LoanAll = () => {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.5, ease: "easeOut" } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
@@ -46,14 +46,25 @@ const LoanAll = () => {
 
         {/* Loans Grid */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="
+    grid 
+    grid-cols-1        
+    sm:grid-cols-2     
+    lg:grid-cols-3    
+    gap-6 sm:gap-8 lg:gap-10 
+    px-5 sm:px-0
+  "
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }} // animate when scrolled into view
+          viewport={{ once: true, amount: 0.3 }}
         >
           {allLoans.map((loan) => (
-            <motion.div key={loan._id} variants={cardVariants}>
+            <motion.div
+              key={loan._id}
+              variants={cardVariants}
+              className="w-full"
+            >
               <LoanCard loan={loan} />
             </motion.div>
           ))}
