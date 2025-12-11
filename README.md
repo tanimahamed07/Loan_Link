@@ -1,12 +1,12 @@
+# LoanLink – Microloan Request & Approval Tracker System
+
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 ## Contributors
 - **Admin Email:** admin1@gmail.com  
 - **Admin Password:** Admin1  
 - **Manager Email:** manager@gmail.com  
 - **Manager Password:** Manager
-
-# LoanLink – Microloan Request & Approval Tracker System
-
-[![License](https://lonelink1.netlify.app/)](LICENSE)
 
 ## Project Overview
 LoanLink is a **web-based microloan request, review, and approval management system**.  
@@ -17,7 +17,7 @@ This project was created for **Assignment 11 (B12-A11_category-22)** as part of 
 ---
 
 ## Live Demo
-🌐 [Live Site Link](https://lonelink1.netlify.app/) <!-- Replace with your deployed URL -->
+🌐 [Live Site Link](https://lonelink1.netlify.app/)
 
 ---
 
@@ -72,7 +72,8 @@ This project was created for **Assignment 11 (B12-A11_category-22)** as part of 
 
 ### Clone Repository
 ```bash
-# Client
+# Clone client repository
 git clone https://github.com/username/loanlink-client.git
-# Server
+
+# Clone server repository
 git clone https://github.com/username/loanlink-server.git
