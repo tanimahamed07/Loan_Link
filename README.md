@@ -73,7 +73,4 @@ This project was created for **Assignment 11 (B12-A11_category-22)** as part of 
 ### Clone Repository
 ```bash
 # Clone client repository
-git clone https://github.com/username/loanlink-client.git
-
-# Clone server repository
-git clone https://github.com/username/loanlink-server.git
+git clone https://github.com/tanimahamed07/assignment-11-frontend.git
