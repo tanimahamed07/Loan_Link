@@ -6,7 +6,7 @@
 
 # LoanLink – Microloan Request & Approval Tracker System
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://lonelink1.netlify.app/)](LICENSE)
 
 ## Project Overview
 LoanLink is a **web-based microloan request, review, and approval management system**.  
