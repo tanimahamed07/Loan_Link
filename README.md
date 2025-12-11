@@ -1,3 +1,9 @@
+## Contributors
+- **Admin Email:** admin1@gmail.com  
+- **Admin Password:** Admin1  
+- **Manager Email:** manager@gmail.com  
+- **Manager Password:** Manager
+
 # LoanLink – Microloan Request & Approval Tracker System
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
