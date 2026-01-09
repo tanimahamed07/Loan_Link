@@ -16,65 +16,87 @@ const Loan = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
-  // Container handles stagger
+  // এনিমেশন ভেরিয়েন্ট
   const containerVariants = {
-    hidden: { opacity: 1 }, // Note: You can keep opacity 1 here or change to 0 if the whole grid needs to fade in. For staggered children, opacity 1 is fine.
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: { 
-        staggerChildren: 0.1, // Adjusted stagger for a snappier look
-        delayChildren: 0.05,  // Reduced initial delay
+        staggerChildren: 0.15, 
       },
     },
   };
 
-  // Each card animation: Fade up and a bit faster
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 }, // Reduced y for less jump
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: "easeInOut" }, // Faster, smoother ease
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   return (
-    <section className="py-12">
-      <div className="container mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">
-            Available Loans
-          </h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400">
-            Explore our top microloan options tailored to your needs
-          </p>
+    <section className="py-16 lg:py-24 bg-transparent transition-colors duration-500">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* --- Section Header: টাইটেল ও স্পেসিং ঠিক করা হয়েছে --- */}
+        <div className="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
+          <motion.h2 
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-gray-900 dark:text-white"
+          >
+            Available <span className="text-amber-500">Loans</span>
+          </motion.h2>
+          
+          <motion.div 
+            initial={{ width: 0 }}
+            whileInView={{ width: "80px" }}
+            viewport={{ once: true }}
+            className="h-1.5 bg-amber-500 mx-auto rounded-full mt-4 mb-6"
+          />
+
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-base sm:text-lg text-gray-600 dark:text-gray-400 font-medium leading-relaxed"
+          >
+            Explore our top microloan options tailored to your business and personal needs. 
+            Simple application, instant approval.
+          </motion.p>
         </div>
 
-        {/* Loans Grid - Optimized for ONE-TIME Scroll Animation */}
-        
+        {/* --- Loans Grid: রেসপনসিভ কলাম এবং গ্যাপ ফিক্স --- */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          // *** THE KEY FIX IS HERE ***
-          viewport={{ 
-            once: true, // Animation runs only ONE time when it enters the viewport
-            amount: 0.2 // Animation starts when 20% of the element is visible
-          }}   
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 px-5 sm:px-0"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
         >
           {loans.map((loan) => (
             <motion.div
               key={loan._id}
               variants={cardVariants}
-              className="w-full"
-              // *** Removed viewport prop from here to prevent re-renders/conflicts ***
+              className="flex justify-center h-full"
             >
-              <LoanCard loan={loan} />
+              <div className="w-full max-w-sm sm:max-w-none">
+                 <LoanCard loan={loan} />
+              </div>
             </motion.div>
           ))}
         </motion.div>
+        
+        {/* লোন না থাকলে একটি মেসেজ (Optional) */}
+        {loans.length === 0 && (
+          <div className="text-center py-20 text-gray-500 italic">
+            No loans available at the moment. Please check back later.
+          </div>
+        )}
       </div>
     </section>
   );
